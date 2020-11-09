@@ -14,14 +14,14 @@ Simple game as an intro to Ruby
 
 ## Pseudocode
 
-Game starts + call Game constructor
-Prompt for Player 1 name + call Player constructor
-Prompt for Player 2 name + call Player constructor
+* Game starts + call Game constructor
+* Prompt for Player 1 name + call Player constructor
+* Prompt for Player 2 name + call Player constructor
 
-WHILE (both players have >= 1 life)
-Generate random question and prompt to Player 1
-Calculate whether input is correct
-IF correct, toggle current player. If incorrect, decrement the Player's life property and toggle current player
-LOOP
+* WHILE (both players have >= 1 life)
+  * Generate random question and prompt to Player 1
+  * Calculate whether input is correct
+  * IF correct, toggle current player. If incorrect, decrement the Player's life property and toggle current player
+* LOOP
 
-Upon breaking out of loop: Display winner
+* Upon breaking out of loop: Display winner
