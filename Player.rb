@@ -2,9 +2,9 @@ class Player
 
   attr_accessor :name, :turns_left
 
-  def initialize(name)
+  def initialize(name, starting_turns)
     @name = name
-    turns_left = 3
+    @turns_left = starting_turns
   end
 
 end
