@@ -1,10 +1,12 @@
 class Game
-
   STARTING_TURNS = 3
 
-  def initialize(diff)
+  def initialize()
+    puts "Welcome to Mathgame! Choose easy (e) or hard (h) difficulty: "
+    print "> "
+    diff = $stdin.gets.chomp
     @turn = 0 # Odd = Player 1 turn, Even = Player 2 turn
-    @max = diff == 'e' ? 10 : 100 # Defines maximum number that will appear in math questions
+    @max = (diff == "e") ? 10 : 100 # Defines maximum number that will appear in math questions
     puts "Max is #{@max}"
     run_game
   end
@@ -14,21 +16,25 @@ class Game
     p @pl1
     p @pl2
     puts "Starting game between #{@pl1.name} and #{@pl2.name}"
-    while (@pl1.turns_left > 0 && @pl2.turns_left > 0)
+    while (@pl1.is_alive && @pl2.is_alive)
       @turn += 1
       run_question
-      puts "#{@pl1.name}: #{@pl1.turns_left}/#{STARTING_TURNS} / #{@pl2.name}: #{@pl2.turns_left}/#{STARTING_TURNS}"
+      print_status
     end
     fancy_print("GAME OVER")
-    puts "After #{@turn} turns, #{whose_turn(@turn+1).name} has won the game!"
-    puts "FINAL: #{@pl1.name}: #{@pl1.turns_left}/#{STARTING_TURNS} / #{@pl2.name}: #{@pl2.turns_left}/#{STARTING_TURNS}"
+    puts "After #{@turn} turns, #{whose_turn(@turn + 1).name} has won the game!"
+    print_status
     puts "Goodbye!"
+  end
+
+  def print_status
+    puts "#{@pl1.print_status} / #{@pl2.print_status}"
   end
 
   def fancy_print(str)
     print "\n" + "-" * 5
     print "   #{str}   "
-    print "-" * 5
+    print "-" * 5 + "\n"
   end
 
   def get_player_names
@@ -43,7 +49,8 @@ class Game
   def whose_turn(turn)
     if (turn % 2 == 1)
       return @pl1
-    else return @pl2
+    else
+      return @pl2
     end
   end
 
@@ -60,7 +67,7 @@ class Game
       puts "Congrats #{active_player.name}, that is correct!"
     else
       puts "Sorry #{active_player.name}, you may wish to review your primary school math."
-      active_player.turns_left -= 1
+      active_player.decrement
     end
   end
 
